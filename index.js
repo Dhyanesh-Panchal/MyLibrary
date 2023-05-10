@@ -5,6 +5,7 @@ require('dotenv').config();
 const inxdexRouter = require('./routes/index');
 const authorRouter = require('./routes/authors');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser')
 
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true });
 
@@ -17,7 +18,7 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 
 
-
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(expressLayouts);
 app.use(express.static('public'))
 app.use('/', inxdexRouter);
